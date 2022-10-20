@@ -29,7 +29,7 @@ const termsError = document.getElementById("termsError")
 
 function checkPassword() {
 
-    if (password1.value != password2.value || password1.value.length < 6) {
+    if (password1.value != password2.value && password1.value.length > 6) {
         password1.style.borderColor = "red"
         password1.style.backgroundImage = "one"
         password2.style.backgroundImage = "none"
