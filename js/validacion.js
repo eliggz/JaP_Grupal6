@@ -7,8 +7,8 @@
     // Loop over them and prevent submission
     Array.prototype.slice.call(forms)
         .forEach(function (form) {
-            if (form == password1)
             form.addEventListener('submit', function (event) {
+                checkPassword()
                 if (!form.checkValidity()) {
                     event.preventDefault()
                     event.stopPropagation()
@@ -17,39 +17,52 @@
                 form.classList.add('was-validated')
             }, false)
         })
-})()    
-
-var form = document.getElementById('.needs-validation');
-form.addEventListener("submit", function (event) {
-    if (password1.value != password2.value) {
-        alert("Password mismatch");
-        event.preventDefault();
-        event.stopPropagation();
-    }
-    else if (form.checkValidity() == false) {
-        event.preventDefault();
-        event.stopPropagation();
-    }
-    form.classList.add("was-validated");
-}, false);
-
-
-
-
-
+})()
 
 const password1 = document.getElementById("password1")
 const password2 = document.getElementById("password2")
+const termsModal = document.getElementById("modalTerminos")
+const termsCheckbox = document.getElementById("termsCheckbox")
+const termsError = document.getElementById("termsError")
 
 
 
+function checkPassword() {
 
-function checkPassword(){
-
-    if (password1.value != password2.value && password1.value.length < 6 ){
-        password1.classList.remove("form-control:invalid")
-    
-    } else{
+    if (password1.value != password2.value || password1.value.length < 6) {
+        password1.style.borderColor = "red"
+        password1.style.backgroundImage = "one"
+        password2.style.backgroundImage = "none"
+        password2.style.borderColor = "red"
+    } else {
+        password1.style.borderColor = "#198754"
+        password2.style.borderColor = "#198754"
     }
 
+}
+
+
+
+
+
+function termsValidation() {
+    if (!termsCheckbox.checked) {
+        termsCheckbox.style.borderColor = "red"
+        termsModal.style.borderColor = "red"
+        termsError.style.display = "block"       
+        termsError.style.color = "red"       
+        return false
+    } else {
+        termsCheckbox.style.borderColor = "#198754"
+        termsCheckbox.style.backgroundColor = "#198754"
+        termsError.style.display = "none"
+        return true
+    }
+}
+
+
+function formSubmit() {
+    if(termsValidation()){
+        alert("ok")
+    }
 }
