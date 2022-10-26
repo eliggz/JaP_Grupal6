@@ -8,7 +8,7 @@
     Array.prototype.slice.call(forms)
         .forEach(function (form) {
             form.addEventListener('submit', function (event) {
-                checkPassword()
+
                 if (!form.checkValidity()) {
                     event.preventDefault()
                     event.stopPropagation()
@@ -19,50 +19,52 @@
         })
 })()
 
-const password1 = document.getElementById("password1")
-const password2 = document.getElementById("password2")
-const termsModal = document.getElementById("modalTerminos")
-const termsCheckbox = document.getElementById("termsCheckbox")
-const termsError = document.getElementById("termsError")
+const password1 = document.getElementById("password1");
+const password2 = document.getElementById("password2");
+const terms = document.getElementById("terms");
+const termsCheckbox = document.getElementById("termsCheckbox");
+const termsError = document.getElementById("termsError");
+const registerForm = document.getElementById("registerForm");
 
 
-
-function checkPassword() {
-
-    if (password2.value!= password1.value  || password1.value.length < 6) {
-        password1.style.borderColor = "red"
-        password1.style.backgroundImage = "none"
-        password2.style.backgroundImage = "none"
-        password2.style.borderColor = "red"
+password2.onkeyup = function () {
+    if (password1.value == password2.value) {
+        password2.setCustomValidity("");
     } else {
-        password1.style.borderColor = "#198754"
-        password2.style.borderColor = "#198754"
+        password2.setCustomValidity("Las contraseñas no coinciden");
     }
 
 }
+password1.onkeyup = function () {
+    if (password1.value == password2.value) {
+        password2.setCustomValidity("");
+    } else {
+        password2.setCustomValidity("Las contraseñas no coinciden");
+    }
 
-
+}
 
 
 
 function termsValidation() {
     if (!termsCheckbox.checked) {
-        termsCheckbox.style.borderColor = "red"
-        termsModal.style.borderColor = "red"
-        termsError.style.display = "block"       
-        termsError.style.color = "red"       
-        return false
+        termsError.style.display = "block";
+        terms.style.color = "red";
     } else {
-        termsCheckbox.style.borderColor = "#198754"
-        termsCheckbox.style.backgroundColor = "#198754"
-        termsError.style.display = "none"
-        return true
+        terms.style.color = "";
+        termsError.style.display = "none";
     }
 }
 
 
 function formSubmit() {
-    if(termsValidation()){
-        alert("ok")
+    termsValidation();
+    if (registerForm.checkValidity() == true) {
+        document.getElementById("main").innerHTML += `
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"></use></svg>
+    Se ha registrado con exito! 
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>`
     }
 }
