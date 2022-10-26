@@ -13,8 +13,9 @@
 <body class="bg-light">
 
   <div class="container">
-    <main>
-      <form onsubmit="formSubmit()" method="get" class="row mt-4 needs-validation" novalidate>
+    <main id="main">
+      <form action="#" id="registerForm"
+      class="row mt-4 needs-validation" novalidate>
         <div class="col">
           <h1 class="mb-3">Registro</h1>
           <hr class="my-4">
@@ -24,7 +25,7 @@
               <input type="text" class="form-control" id="nombre" required>
               <p><i class="bi bi-exclamation-triangle-fill"></i></p>
               <div class="invalid-feedback">
-                No
+                Debe ingresar un nombre.
               </div>
               <div class="valid-feedback">
 
@@ -35,7 +36,7 @@
               <label for="apellido" class="form-label">Apellido</label>
               <input type="text" class="form-control" id="apellido" required>
               <div class="invalid-feedback">
-                No
+                Debe ingresar un apellido.
               </div>
               <div class="valid-feedback">
 
@@ -46,7 +47,7 @@
               <label for="email" class="form-label">Email</label>
               <input type="email" class="form-control" id="email" required>
               <div class="invalid-feedback">
-                No
+                Debe ingresar un email.
               </div>
               <div class="valid-feedback">
 
@@ -55,8 +56,10 @@
 
             <div class="col-sm-6">
               <label for="password1" id="password1Label" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="password1">
-
+              <input type="password" class="form-control" id="password1" required>
+              <div class="invalid-feedback">
+                Debe ingresar una contraseña con al menos 6 caracteres.
+              </div>
               <div class="valid-feedback">
 
               </div>
@@ -64,15 +67,18 @@
 
             <div class="col-sm-6">
               <label for="password2" id="password2Label" class="form-label ">Repetir contraseña</label>
-              <input type="password" class="form-control" id="password2">
+              <input type="password" class="form-control" id="password2" required>
+              <div class="invalid-feedback">
+                La contraseña no es la misma.
+              </div>
 
 
             </div>
 
             <div class="col-sm-12">
-              <button type="button" class="btn btn-link ps-0" data-bs-toggle="modal"
+              <button type="button" id="terms" class="btn btn-link ps-0" data-bs-toggle="modal"
                 data-bs-target="#modalTerminos">Términos del servicio</button>
-                <span id="termsError" style="display:none;">Debes aceptar los terminos y condiciones</span>
+                <span id="termsError" style="display:none; color:red;">Debes aceptar los terminos y condiciones</span>
               <div class="invalid-feedback">
                 No
               </div>
@@ -80,9 +86,32 @@
             </div>
 
 
-            <button class="btn btn-primary" type="submit">Registrarme</button>
+            <button onclick="formSubmit();" class="btn btn-primary" type="submit">Registrarme</button>
 
 
+          </div>
+        </div>
+
+        <div class="modal fade" id="modalTerminos" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 id="termsTitle" class="modal-title fs-5">Términos y condiciones del servicio.</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus quasi sapiente voluptatum deserunt?
+                  Deleniti, adipisci vitae in quaerat eius nemo optio? Quas at magni saepe cumque. Delectus perspiciatis omnis
+                  accusamus.</p>
+              </div>
+              <div class="modal-footer">
+                <div class="form-check">
+                  <input type="checkbox" onclick="termsValidation()" class="form-check-input" id="termsCheckbox" required>
+                  <label class="form-check-label" for="termsCheckbox">Acepto los términos y condiciones del servicio.</label>
+                  <span>Debes aceptar los terminos y condiciones</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </form>
@@ -97,30 +126,11 @@
     </footer>
   </div>
 
-  <div class="modal fade" id="modalTerminos" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 id="termsTitle" class="modal-title fs-5">Términos y condiciones del servicio.</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus quasi sapiente voluptatum deserunt?
-            Deleniti, adipisci vitae in quaerat eius nemo optio? Quas at magni saepe cumque. Delectus perspiciatis omnis
-            accusamus.</p>
-        </div>
-        <div class="modal-footer">
-          <div class="form-check">
-            <input type="checkbox" onclick="termsValidation()" class="form-check-input" id="termsCheckbox">
-            <label class="form-check-label" for="termsCheckbox">Acepto los términos y condiciones del servicio.</label>
-            <span>Debes aceptar los terminos y condiciones</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+ 
 
   <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+    crossorigin="anonymous"></script>
   <script src="js/validacion.js"></script>
 </body>
 
